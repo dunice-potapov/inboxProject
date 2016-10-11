@@ -1,0 +1,62 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.main-wrapper,
+.main-container {
+  height: 100%;
+  width: 100%;
+}
+.main-container {
+  background-color: #ececec;
+}
+md-toolbar.md-default-theme.md-hue-3:not(.md-menu-toolbar),
+md-toolbar.md-hue-3:not(.md-menu-toolbar) {
+  background-color: #5677fc;
+  color: #fffffe;
+}
+.auth-box {
+  margin-left: auto;
+}
+.inbox-content {
+  width: 100%;
+}
+
+.inbox-list {
+  padding-top: 20px;
+}
+
+@media screen and (min-width: 992px) {
+  .inbox-list {
+    width: 70%;
+    margin: 0 auto;
+  }
+}
+@media screen and (max-width: 991px) {
+  .inbox-list {
+    padding: 20px 14px;
+  }
+}
+.inbox-item {
+  background-color: #fff;
+  width: 100%;
+  margin: 0 0 8px;
+}
+.inbox-subject,
+.inbox-snippet {
+  display: inline-block;
+  width: 49.5%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+}
+@media screen and (max-width: 530px) {
+  .inbox-subject,
+  .inbox-snippet {
+    width: 48%;
+  }
+}
+.inbox-subject {
+  font-weight: bold;
+}

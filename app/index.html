@@ -12,10 +12,13 @@
     <meta name="google-signin-client_id" content="26051947364-1ui81sac3cle9qjs904ucg1u165sjajh.apps.googleusercontent.com">
     <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
     <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+
     <link rel="stylesheet" href="app.css">
     <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://apis.google.com/js/client.js"></script>
 </head>
 <body>
 
@@ -23,15 +26,41 @@
     <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<div ng-controller="MainCtrl as ctrl">
-    <b>Hero</b><br>
-    <inbox-detail hero="ctrl.hero"></inbox-detail>
+<div ng-controller="MainCtrl as ctrl" ng-cloak layout-gt-sm="row" layout="column" class="main-wrapper">
+
+    <div flex class="main-container">
+
+        <md-toolbar layout="row" class="md-hue-3">
+            <div class="md-toolbar-tools">
+                <span>Angular Inbox</span>
+                <div class="auth-box">
+                    <div class="g-signin2" data-onsuccess="onSignIn" id="signInButton"></div>
+                    <div class="signOut" id="signOut" ng-click="signOut()">OUUUTTT</div>
+                </div>
+            </div>
+        </md-toolbar>
+
+        <md-content flex md-scroll-y class="inbox-content">
+            <md-list class="inbox-list">
+                <inbox-item md-item ng-repeat="email in ctrl.emails" email="email"></inbox-item>
+            </md-list>
+        </md-content>
+
+    </div>
+
 </div>
 
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-aria/angular-aria.js"></script>
+<script src="bower_components/angular-material/angular-material.js"></script>
+
 <script src="app.js"></script>
-<script src="inboxDetail.js"></script>
+<script src="constants.js"></script>
+<script src="gmailApiService.js"></script>
+<script src="mainCtrl.js"></script>
+<script src="inboxItem.js"></script>
 
 </body>
 </html>
