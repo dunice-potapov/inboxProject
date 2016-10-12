@@ -44,14 +44,9 @@ function GmailApiService($q, confGmail) {
   function _handleAuthResult(authResult) {
     //var authorizeDiv = document.getElementById('authorize-div');
     if (authResult && !authResult.error) {
-      this.resolve(authResult)
-      // Hide auth UI, then load client library.
-      //authorizeDiv.style.display = 'none';
+      this.resolve(authResult);
     } else {
-      this.reject(authResult.error || 'No result')
-      // Show auth UI, allowing the user to initiate authorization by
-      // clicking authorize button.
-      //authorizeDiv.style.display = 'inline';
+      this.reject(authResult.error || 'No result');
     }
   }
 
@@ -74,22 +69,26 @@ function GmailApiService($q, confGmail) {
       'maxResults': confGmail.maxResults
     });
 
-    request.execute(function(resp) {
-      var messages = resp.messages
-        , fullMessages = [];
+    if (request) {
+      request.execute(function(resp) {
+        var messages = resp.messages
+          , fullMessages = [];
 
-      messages.forEach(function(message) {
-        fullMessages.push(_sendMessageRequest(message.id));
-      });
-
-      return $q.all(fullMessages)
-        .then(function(messages) {
-          self.resolve(messages);
-        })
-        .catch(function (err) {
-          self.reject(err);
+        messages.forEach(function(message) {
+          if (message.id) {
+            fullMessages.push(_sendMessageRequest(message.id));
+          }
         });
-    });
+
+        return $q.all(fullMessages)
+          .then(function(messages) {
+            self.resolve(messages);
+          })
+          .catch(function (err) {
+            self.reject(err);
+          });
+      });
+    }
   }
 
   function _sendMessageRequest(messageId) {
@@ -106,10 +105,10 @@ function GmailApiService($q, confGmail) {
 
   function _appendMessageRow(message) {
     var showedMessage = {};
-    showedMessage.from = _getHeader(message.payload.headers, 'From');
-    showedMessage.subject = _getHeader(message.payload.headers, 'Subject');
-    showedMessage.date = _getHeader(message.payload.headers, 'Date');
-    showedMessage.snippet = message.snippet;
+    showedMessage.from = _getHeader(message.payload.headers, 'From') || '';
+    showedMessage.subject = _getHeader(message.payload.headers, 'Subject') || '';
+    showedMessage.date = _getHeader(message.payload.headers, 'Date') || '';
+    showedMessage.snippet = message.snippet || '';
     this.resolve(showedMessage);
   }
 

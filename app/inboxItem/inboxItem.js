@@ -3,7 +3,7 @@ function InboxItemController() {
 }
 
 angular.module('heroApp').component('inboxItem', {
-  templateUrl: 'inboxItem.html',
+  templateUrl: 'inboxItem/inboxItem.html',
   controller: InboxItemController,
   bindings: {
     email: '='
