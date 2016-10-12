@@ -1,5 +1,15 @@
 <md-content flex md-scroll-y class="inbox-content">
-    <md-list class="inbox-list">
-        <inbox-item md-item ng-repeat="email in $ctrl.emails" email="email"></inbox-item>
+    <md-list class="inbox-list" ng-show="$ctrl.emailsHere">
+
+        <h3>Today</h3>
+        <inbox-item md-item ng-repeat="email in $ctrl.emails | emailDateFilter:'today'" email="email"></inbox-item>
+        <h3>Yesterday</h3>
+        <inbox-item md-item ng-repeat="email in $ctrl.emails | emailDateFilter:'yesterday'" email="email"></inbox-item>
+        <h3>This week</h3>
+        <inbox-item md-item ng-repeat="email in $ctrl.emails | emailDateFilter:'this_week'" email="email"></inbox-item>
+        <h3>This year</h3>
+        <inbox-item md-item ng-repeat="email in $ctrl.emails | emailDateFilter:'this_year'" email="email"></inbox-item>
+        <h3>Before this year</h3>
+        <inbox-item md-item ng-repeat="email in $ctrl.emails | emailDateFilter:'prev_years'" email="email"></inbox-item>
     </md-list>
 </md-content>

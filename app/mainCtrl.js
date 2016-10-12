@@ -7,17 +7,19 @@ function MainCtrl($timeout, $scope, confGmail, GmailApiService) {
 
   var vm = this;
   vm.emails = [];
-
-  $scope.signOut = function() {
-    GmailApiService.signOut();
-  };
+  vm.emailsHere = false;
 
   function init() {
     GmailApiService.getEmails()
       .then(function (emails) {
         vm.emails = emails;
+        vm.emailsHere = true;
       });
   }
+
+  $scope.signOut = function() {
+    GmailApiService.signOut();
+  };
 
   init();
 }

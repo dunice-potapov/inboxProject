@@ -2,13 +2,15 @@
   margin: 0;
   padding: 0;
 }
-.main-wrapper,
-.main-container {
+.app-body {
+  background-color: #ececec;
+}
+.main-wrapper{
   height: 100%;
   width: 100%;
 }
 .main-container {
-  background-color: #ececec;
+  width: 100%;
 }
 md-toolbar.md-default-theme.md-hue-3:not(.md-menu-toolbar),
 md-toolbar.md-hue-3:not(.md-menu-toolbar) {

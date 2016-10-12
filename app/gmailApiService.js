@@ -107,7 +107,8 @@ function GmailApiService($q, confGmail) {
     var showedMessage = {};
     showedMessage.from = _getHeader(message.payload.headers, 'From') || '';
     showedMessage.subject = _getHeader(message.payload.headers, 'Subject') || '';
-    showedMessage.date = _getHeader(message.payload.headers, 'Date') || '';
+    showedMessage.formattedDate = _getHeader(message.payload.headers, 'Date') || '';
+    showedMessage.date = message.internalDate || '';
     showedMessage.snippet = message.snippet || '';
     this.resolve(showedMessage);
   }
