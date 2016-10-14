@@ -1,5 +1,38 @@
-function InboxItemController() {
-  //console.log('email', this.email)
+function InboxItemController($mdDialog, $sce) {
+  //console.log('email', this.email);
+  var vm = this;
+  this.showMessage = function(ev) {
+    console.log('showMessage', ev);
+
+    $mdDialog.show({
+      controller: DialogController,
+      template: $sce.trustAsHtml(vm.email.raw),
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true,
+      fullscreen: false
+    })
+      .then(function(answer) {
+        //console.log('CASE1');
+      }, function() {
+        //console.log('CASE2');
+      });
+
+  };
+}
+
+function DialogController($scope, $mdDialog) {
+  $scope.hide = function() {
+    $mdDialog.hide();
+  };
+
+  $scope.cancel = function() {
+    $mdDialog.cancel();
+  };
+
+  $scope.answer = function(answer) {
+    $mdDialog.hide(answer);
+  };
 }
 
 angular.module('heroApp').component('inboxItem', {

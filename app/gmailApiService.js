@@ -9,6 +9,7 @@ function GmailApiService($q, confGmail) {
   this.emails = [];
   this.getEmails = getEmails;
   this.signOut = signOut;
+  this.pageToken = undefined;
 
 
   function _auth() {
@@ -66,13 +67,16 @@ function GmailApiService($q, confGmail) {
     var request = gapi.client.gmail.users.messages.list({
       'userId': 'me',
       'labelIds': 'INBOX',
-      'maxResults': confGmail.maxResults
+      'maxResults': confGmail.maxResults,
+      'pageToken': vm.pageToken || ''
     });
 
     if (request) {
       request.execute(function(resp) {
         var messages = resp.messages
           , fullMessages = [];
+
+        vm.pageToken = resp.nextPageToken;
 
         messages.forEach(function(message) {
           if (message.id) {
@@ -96,7 +100,7 @@ function GmailApiService($q, confGmail) {
     gapi.client.gmail.users.messages.get({
       'userId': 'me',
       'id': messageId,
-      'format': 'full'
+      'format': 'raw'
     })
       .execute(angular.bind(deferred, _appendMessageRow));
 
@@ -104,12 +108,15 @@ function GmailApiService($q, confGmail) {
   }
 
   function _appendMessageRow(message) {
+    //console.log('message', message);
     var showedMessage = {};
-    showedMessage.from = _getHeader(message.payload.headers, 'From') || '';
-    showedMessage.subject = _getHeader(message.payload.headers, 'Subject') || '';
-    showedMessage.formattedDate = _getHeader(message.payload.headers, 'Date') || '';
+    //showedMessage.from = _getHeader(message.payload.headers, 'From') || '';
+    //showedMessage.subject = _getHeader(message.payload.headers, 'Subject') || '';
+    //showedMessage.formattedDate = _getHeader(message.payload.headers, 'Date') || '';
     showedMessage.date = message.internalDate || '';
     showedMessage.snippet = message.snippet || '';
+    showedMessage.raw = new TextDecoderLite('utf-8').decode(toByteArray(message.raw));
+    //console.log('showedMessage', showedMessage);
     this.resolve(showedMessage);
   }
 

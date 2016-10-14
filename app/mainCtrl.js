@@ -7,6 +7,7 @@ function MainCtrl($timeout, $scope, confGmail, GmailApiService) {
 
   var vm = this;
   vm.emails = [];
+  vm.showedEmails = [];
   vm.emailsHere = false;
 
   function init() {
@@ -19,6 +20,16 @@ function MainCtrl($timeout, $scope, confGmail, GmailApiService) {
 
   $scope.signOut = function() {
     GmailApiService.signOut();
+  };
+
+  $scope.loadMore = function() {
+    console.log('LOAD_MORE', vm.emails.length);
+    if (!vm.emails.length) return;
+    GmailApiService.getEmails()
+      .then(function (emails) {
+        vm.emails = vm.emails.concat(emails);
+      });
+
   };
 
   init();
