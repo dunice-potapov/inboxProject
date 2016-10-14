@@ -16,12 +16,17 @@ md-toolbar.md-default-theme.md-hue-3:not(.md-menu-toolbar),
 md-toolbar.md-hue-3:not(.md-menu-toolbar) {
   background-color: #5677fc;
   color: #fffffe;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
 }
 .auth-box {
   margin-left: auto;
 }
 .inbox-content {
   width: 100%;
+  padding-top: 64px;
 }
 
 .inbox-list {
