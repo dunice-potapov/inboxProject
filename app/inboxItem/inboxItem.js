@@ -2,11 +2,10 @@ function InboxItemController($mdDialog, $sce) {
   //console.log('email', this.email);
   var vm = this;
   this.showMessage = function(ev) {
-    console.log('showMessage', ev);
-
+    //console.log('showMessage', ev);
     $mdDialog.show({
       controller: DialogController,
-      template: $sce.trustAsHtml(vm.email.raw),
+      template: '<div>' + vm.email.raw + '</div>',
       parent: angular.element(document.body),
       targetEvent: ev,
       clickOutsideToClose:true,

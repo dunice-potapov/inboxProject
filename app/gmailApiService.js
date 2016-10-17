@@ -1,9 +1,9 @@
 angular.module('heroApp')
   .service('GmailApiService', GmailApiService);
 
-GmailApiService.$inject = ['$q', 'confGmail'];
+GmailApiService.$inject = ['$q', 'confGmail', '$http'];
 
-function GmailApiService($q, confGmail) {
+function GmailApiService($q, confGmail, $http) {
 
   var vm = this;
   this.emails = [];
@@ -100,7 +100,8 @@ function GmailApiService($q, confGmail) {
     gapi.client.gmail.users.messages.get({
       'userId': 'me',
       'id': messageId,
-      'format': 'raw'
+      //'format': 'raw'
+      'format': 'full'
     })
       .execute(angular.bind(deferred, _appendMessageRow));
 
@@ -110,13 +111,21 @@ function GmailApiService($q, confGmail) {
   function _appendMessageRow(message) {
     //console.log('message', message);
     var showedMessage = {};
-    //showedMessage.from = _getHeader(message.payload.headers, 'From') || '';
-    //showedMessage.subject = _getHeader(message.payload.headers, 'Subject') || '';
-    //showedMessage.formattedDate = _getHeader(message.payload.headers, 'Date') || '';
+    showedMessage.from = _getHeader(message.payload.headers, 'From') || '';
+    showedMessage.subject = _getHeader(message.payload.headers, 'Subject') || '';
+    showedMessage.formattedDate = _getHeader(message.payload.headers, 'Date') || '';
     showedMessage.date = message.internalDate || '';
     showedMessage.snippet = message.snippet || '';
-    showedMessage.raw = new TextDecoderLite('utf-8').decode(toByteArray(message.raw));
+    showedMessage.raw = '';
+    if (message.payload.parts) {
+      for (var i = 0; i < message.payload.parts.length; i++) {
+        if (i > 0) {
+          showedMessage.raw += new TextDecoderLite('utf-8').decode(toByteArray(message.payload.parts[i].body.data));
+        }
+      }
+    }
     //console.log('showedMessage', showedMessage);
+
     this.resolve(showedMessage);
   }
 
