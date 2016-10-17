@@ -15,5 +15,10 @@
     "postinstall": "bower install",
     "prestart": "npm install",
     "start": "http-server -a localhost -p 5000 -c-1 ./app"
+  },
+  "dependencies": {
+    "ejs": "^2.5.2",
+    "express": "^4.14.0",
+    "path": "^0.12.7"
   }
 }
