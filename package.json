@@ -2,8 +2,8 @@
   "name": "inbox-project",
   "private": true,
   "version": "0.0.0",
-  "description": "very simple inbox based on Components of AngularJS 1.5",
-  "repository": "https://github.com/angular/angular-seed",
+  "description": "Very simple inbox based on Components of AngularJS 1.5",
+  "repository": "https://bitbucket.org/dunice-potapov/inboxproject",
   "license": "MIT",
   "devDependencies": {
     "bower": "^1.7.7",
