@@ -17,8 +17,13 @@
     "start": "http-server -a localhost -p 5000 -c-1 ./app"
   },
   "dependencies": {
+    "bluebird": "^3.4.6",
     "ejs": "^2.5.2",
     "express": "^4.14.0",
+    "googleapis": "^14.0.0",
+    "mongoose": "^4.6.4",
+    "passport": "^0.3.2",
+    "passport-google-oauth": "^1.0.0",
     "path": "^0.12.7"
   }
 }
