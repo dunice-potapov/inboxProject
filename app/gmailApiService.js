@@ -123,6 +123,10 @@ function GmailApiService($q, confGmail, $http) {
           showedMessage.raw += new TextDecoderLite('utf-8').decode(toByteArray(message.payload.parts[i].body.data));
         }
       }
+    } else if (angular.isObject(message.payload.body)) {
+      showedMessage.raw += new TextDecoderLite('utf-8').decode(toByteArray(message.payload.body.data));
+    } else {
+      showedMessage.raw += showedMessage.snippet;
     }
     //console.log('showedMessage', showedMessage);
 

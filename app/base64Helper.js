@@ -32,9 +32,9 @@ init();
 
 function toByteArray (b64) {
   var i, j, l, tmp, placeHolders, arr;
-  var len = b64.length;
+  var len = (typeof b64 == "string" && b64.length) ? b64.length : 0;
 
-  if (len % 4 > 0) {
+  if (len % 4 > 0 || len == 0) {
     throw new Error('Invalid string. Length must be a multiple of 4')
   }
 
