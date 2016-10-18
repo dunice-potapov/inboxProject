@@ -9,7 +9,7 @@ RUN \
     npm install --global gulp-cli && \
     npm install
 
-EXPOSE 5000
+EXPOSE 8000
 
 # CMD ["npm", "start"]
 CMD ["gulp", "webserver"]
