@@ -72,6 +72,20 @@ npm start
 
 Now browse to the app at `http://localhost:5000`.
 
-You will see the list of latest 100 emails from your Gmail account divided by categories: Today, Yesterday, This week, This year, Before this year
+You will see the list of latest emails from your Gmail account divided by categories: Today, Yesterday, This week, This year, Before this year
 
-If you want to see more or less quantity of emails you can change the `maxResults` value at `app/constants.js`
+If you want to see more emails please scroll down it will autoload next 15 emails.
+
+## Docker using
+
+Please install Docker into your system - (https://www.docker.com/products/overview)[https://www.docker.com/products/overview]
+
+and Docker Compose - (https://docs.docker.com/compose/install/)[https://docs.docker.com/compose/install/]
+
+After it just run
+
+```
+docker-compose up
+```
+
+When building would be finished please browse to the app at `http://localhost:49160`.
