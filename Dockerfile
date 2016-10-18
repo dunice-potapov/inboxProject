@@ -1,15 +1,21 @@
-FROM node:4.2.4
+FROM node:argon
 
-WORKDIR /home/app
-ADD . /home/app
+# Create app directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-RUN npm update -g npm
-RUN \
-    npm install -g bower && \
-    npm install --global gulp-cli && \
-    npm install
+# Install app dependencies
+COPY package.json /usr/src/app/
 
-EXPOSE 8000
+RUN npm install --global bower
+RUN npm install
 
-# CMD ["npm", "start"]
-CMD ["gulp", "webserver"]
+COPY bower.json /usr/src/app/
+COPY .bowerrc /usr/src/app/
+RUN bower install --allow-root
+
+# Bundle app source
+COPY . /usr/src/app
+
+EXPOSE 5000
+CMD [ "npm", "start" ]
