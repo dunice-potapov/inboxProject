@@ -78,9 +78,9 @@ If you want to see more emails please scroll down it will autoload next 15 email
 
 ## Docker using
 
-Please install Docker into your system - (https://www.docker.com/products/overview)[https://www.docker.com/products/overview]
+Please install Docker into your system - [https://www.docker.com/products/overview](https://www.docker.com/products/overview)
 
-and Docker Compose - (https://docs.docker.com/compose/install/)[https://docs.docker.com/compose/install/]
+and Docker Compose - [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)
 
 After it just run
 
