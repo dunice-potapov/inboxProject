@@ -109,7 +109,7 @@ function GmailApiService($q, confGmail, $http) {
   }
 
   function _appendMessageRow(message) {
-    console.log('message', message);
+    //console.log('message', message);
     var showedMessage = {};
     showedMessage.from = _getHeader(message.payload.headers, 'From') || '';
     showedMessage.subject = _getHeader(message.payload.headers, 'Subject') || '';

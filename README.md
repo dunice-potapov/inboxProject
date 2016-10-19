@@ -72,6 +72,8 @@ npm start
 
 Now browse to the app at `http://localhost:5000`.
 
+*Please be sure that you allow popups in your browser for sing in to Google account*
+
 You will see the list of latest emails from your Gmail account divided by categories: Today, Yesterday, This week, This year, Before this year
 
 If you want to see more emails please scroll down it will autoload next 15 emails.
