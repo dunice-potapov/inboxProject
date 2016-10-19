@@ -91,3 +91,5 @@ docker-compose up
 ```
 
 When building would be finished please browse to the app at `http://localhost:49160`.
+
+*Please be sure that you allow popups in your browser for sing in to Google account*
