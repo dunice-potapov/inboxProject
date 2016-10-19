@@ -109,7 +109,7 @@ function GmailApiService($q, confGmail, $http) {
   }
 
   function _appendMessageRow(message) {
-    //console.log('message', message);
+    console.log('message', message);
     var showedMessage = {};
     showedMessage.from = _getHeader(message.payload.headers, 'From') || '';
     showedMessage.subject = _getHeader(message.payload.headers, 'Subject') || '';
@@ -117,13 +117,13 @@ function GmailApiService($q, confGmail, $http) {
     showedMessage.date = message.internalDate || '';
     showedMessage.snippet = message.snippet || '';
     showedMessage.raw = '';
-    if (message.payload.parts) {
+    if (message.payload.parts && message.payload.parts[1].body.data) {
       for (var i = 0; i < message.payload.parts.length; i++) {
-        if (i > 0) {
+        if (i > 0 && message.payload.parts[i].body.data) {
           showedMessage.raw += new TextDecoderLite('utf-8').decode(toByteArray(message.payload.parts[i].body.data));
         }
       }
-    } else if (angular.isObject(message.payload.body)) {
+    } else if (angular.isObject(message.payload.body) && message.payload.body.data) {
       showedMessage.raw += new TextDecoderLite('utf-8').decode(toByteArray(message.payload.body.data));
     } else {
       showedMessage.raw += showedMessage.snippet;
